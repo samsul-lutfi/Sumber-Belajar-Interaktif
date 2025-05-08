@@ -1,0 +1,124 @@
+alur aplikasi web "Sumber Belajar Interaktif" berbasis PHP, disajikan dalam bentuk alur pengguna (user flow) dan alur sistem (system flow) agar memudahkan Anda memahami dan mengembangkan aplikasinya.
+🔷 A. Alur Pengguna (User Flow)
+1. Pengguna Baru (Siswa / Guru)
+css
+SalinEdit
+[Beranda] 
+   ↓ klik
+[Daftar Akun]
+   ↓ isi form
+[Simpan Akun] → [Login]
+2. Siswa
+css
+SalinEdit
+[Login Siswa]
+   ↓
+[Dashboard Siswa]
+   ↓
+[Pilih Materi] → [Baca Materi / Tonton Video]
+   ↓
+[Kerjakan Latihan / Kuis]
+   ↓
+[Lihat Hasil Skor & Statistik]
+   ↓
+[Forum Diskusi] → [Tanya / Jawab]
+3. Guru/Admin
+css
+SalinEdit
+[Login Guru/Admin]
+   ↓
+[Dashboard Admin]
+   ↓
+[Kelola Materi] → [Upload/Edit Materi]
+[Kelola Soal] → [Tambah/Edit Soal]
+[Lihat Statistik Siswa]
+   ↓
+[Kelola Forum Diskusi]
+🔷 B. Alur Sistem (System Flow)
+Berikut alur sistem dibagi berdasarkan proses utama:
+1. Registrasi dan Login
+css
+SalinEdit
+Form Registrasi → Validasi → Simpan ke DB (users)
+Form Login → Cek username & password → Redirect ke dashboard
+2. Akses Materi
+bash
+SalinEdit
+Siswa memilih materi → Query ke DB (materi) → Tampilkan isi file/video
+3. Latihan Soal / Kuis
+java
+SalinEdit
+Siswa mulai kuis
+   ↓
+Ambil soal dari DB (berdasarkan materi)
+   ↓
+User menjawab → Simpan jawaban ke DB (hasil_kuis)
+   ↓
+Hitung skor → Tampilkan skor
+4. Manajemen Materi (Admin/Guru)
+java
+SalinEdit
+Upload file materi
+   ↓
+Simpan judul, deskripsi, dan file ke DB (materi)
+   ↓
+Materi langsung tersedia untuk siswa
+5. Forum Diskusi
+sql
+SalinEdit
+User kirim pertanyaan → Simpan ke DB (forum)
+User lain/guru membalas → Simpan komentar
+Forum ditampilkan berdasarkan materi terkait
+
+
+
+🎨 Desain Tampilan Antarmuka (Mockup UI)
+1. Halaman Beranda
+•	Tampilkan sumber terbaru & terpopuler
+•	Navigasi ke kategori (buku, video, jurnal, internet, alam)
+2. Halaman Sumber Belajar
+•	Judul, deskripsi, file/link sumber
+•	Tombol: Unduh, Bookmark, Diskusi
+3. Halaman Tambah Sumber (Admin/Guru)
+•	Form: Judul, deskripsi, pilih kategori, unggah file / isi link
+4. Forum Diskusi
+•	Komentar terkait sumber
+•	Kotak input komentar baru
+
+UNTUK Halaman Login dan Register
+1. Validasi Form di Frontend
+🔹 Masalah: Tidak terlihat apakah ada validasi untuk:
+•	Username unik
+•	Format password
+•	Kecocokan konfirmasi password
+🔧 Saran: Tambahkan validasi Javascript atau HTML5:
+html
+SalinEdit
+<input type="password" name="password" required minlength="4">
+Dan tampilkan pesan error jika:
+•	Password dan konfirmasi tidak cocok
+•	Username sudah dipakai (bisa ditampilkan setelah pengecekan di server)
+2. Keamanan Password
+🔹 Masalah: Tidak ada indikator keamanan password atau persyaratan.
+🔧 Saran:
+•	Tambahkan indikator kekuatan password ("lemah", "kuat", dll.)
+3. Tata Letak dan Aksesibilitas
+🔹 Masalah Kecil:
+•	Form terlalu sempit jika dilihat di layar besar
+•	Tidak ada label for yang mengaitkan dengan input untuk aksesibilitas
+🔧 Saran:
+•	Tambahkan <label for="username">Username</label> sebelum input
+•	Gunakan responsive design: max-width: 500px; width: 100% agar tetap bagus di mobile/desktop
+4. Tombol Register Beri Umpan Balik
+🔹 Masalah: Tidak jelas apakah sedang memproses saat diklik.
+🔧 Saran:
+•	Tambahkan loading spinner atau disable tombol setelah diklik agar pengguna tidak klik berkali-kali.
+5. Penggunaan Bahasa Konsisten
+•	Sudah baik pakai bahasa Indonesia secara konsisten (👍)
+•	Bisa dipertimbangkan untuk menambahkan tooltip/bantuan singkat (misalnya "Gunakan minimal 6 karakter")
+🎁 Bonus: UX Enhancement
+•	Tambahkan opsi “👁️ Tampilkan password”
+•	Tambahkan checkbox "Saya menyetujui ketentuan layanan"
+•	Gunakan alert dengan warna (green untuk sukses, red untuk gagal) untuk feedback
+
+
